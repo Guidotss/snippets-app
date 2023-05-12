@@ -1,17 +1,45 @@
 import { useEffect, useState } from "react";
+import { readDir } from '@tauri-apps/api/fs'
+import { desktopDir } from '@tauri-apps/api/path'
 import { useSnippetsStore } from "../../store";
 import { TypingEffect } from "./TypingEffect";
 
+
 export const Sidebar = () => {
   const [snippetName, setSnippetName] = useState<string>("");
-  const { addSnippetName,deleteSnippetName,snippetsNames,selectSnippet } = useSnippetsStore();
+  const { addSnippetName,deleteSnippetName,snippetsNames,selectSnippet,setLastSnippetName } = useSnippetsStore();
+
+
+  useEffect(() => {
+    readFiles().then( files => {
+      files.forEach( file => {
+        if(file) addSnippetName(file);
+      })
+    })
+  },[]); 
 
   const handleAddSnippet = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (snippetName.trim().length === 0) return;
+    
     addSnippetName(snippetName);
+    setLastSnippetName(snippetName);
     setSnippetName("");
   };
+
+
+  const readFiles = async() => {
+    const path = `${await desktopDir()}/snippets-app/snippets`;
+    const files = await readDir(path);
+    return files.map( file => {
+      if(file.name === '.gitkeep') return;
+      return file.name?.split('.')[0];
+    });
+  }
+  
+
+
+
 
   const handleDeleteSnippet = (snippetName: string) => {
     deleteSnippetName(snippetName);
@@ -57,4 +85,4 @@ export const Sidebar = () => {
       </div>
     </aside>
   );
-};
+};  
