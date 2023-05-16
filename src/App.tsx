@@ -1,12 +1,14 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Sidebar } from "./components/ui"
 import { TfiPencil } from 'react-icons/tfi';
 import { SnippetContext } from "./context";
 import { SnipperEditor } from "./components/snippets";
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
 
-  const { selectedSnippet,snippetsNames } = useContext( SnippetContext ); 
+  const { selectedSnippet, saveSnippet } = useContext( SnippetContext ); 
+
 
   return (
     <div className='h-screen  bg-slate-800 flex'>
@@ -30,6 +32,7 @@ const App = () => {
             )
         }
       </main>
+      <Toaster/>
     </div>
   )
 }

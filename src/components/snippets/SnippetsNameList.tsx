@@ -7,8 +7,15 @@ export const SnippetsNameList = () => {
   const { snippetsNames, deleteSnippetName, selectSnippet } =
     useContext(SnippetContext);
 
-  const handleDelete = (event: React.MouseEvent, id: number) => {
+  const handleDelete = async (event: React.MouseEvent, id: number) => {
     event.stopPropagation();
+
+    const accept = await window.confirm(
+      "¿Estás seguro que deseas eliminar el snippet?"
+    );
+    
+    if (!accept) return;
+
     deleteSnippetName(id);
   };
 

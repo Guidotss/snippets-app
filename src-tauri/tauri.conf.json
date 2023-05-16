@@ -17,7 +17,19 @@
         "all": false,
         "open": true
       },
-      "fs":{
+      "dialog": {
+        "message": true,
+        "save": true,
+        "confirm": true
+      },
+      "path": {
+        "all": true
+      },
+      "fs": {
+        "readFile": true,
+        "removeFile": true,
+        "writeFile": true,
+        "readDir": true,
         "scope": ["**/*"]
       }
     },
