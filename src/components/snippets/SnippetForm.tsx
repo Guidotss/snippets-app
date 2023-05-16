@@ -7,12 +7,15 @@ export const SnippetForm = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+
+    if (!snippetName) return;
+
     addSnippetName(snippetName);
     setSnippetName("");
   };
 
   return (
-    <form className="flex flex-col" onSubmit={handleSubmit}>
+    <form className="flex flex-col mt-4" onSubmit={handleSubmit}>
       <input
         className=" p-1 rounded-md bg-slate-800 text-slate-50 px-2"
         type="text"

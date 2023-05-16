@@ -1,25 +1,40 @@
 import { SnippetState } from '.'; 
+import { Snippet } from '../interfaces';
 
 
 type SnippetsActionType = 
-    | { type: "[Snippets - addSnippet]", payload: string }
-    | { type: "[Snippets - deleteSnippet]", payload: string }
+    | { type: "[Snippets] - addSnippet", payload: string }
+    | { type: "[Snippets] - deleteSnippet", payload: number }
+    | { type: "[Snippets] - selectSnippet", payload: Snippet }
+    | { type: "[Snippets] - setCode", payload?: string }
 
 
 export const snippetReducer = (state: SnippetState, action: SnippetsActionType): SnippetState => {
     switch (action.type) {
-        case '[Snippets - addSnippet]': 
+        case '[Snippets] - addSnippet': 
             return {
                 ...state,
                 snippetName: action.payload,
                 snippetsNames: [...state.snippetsNames, action.payload]
             }
         
-        case '[Snippets - deleteSnippet]': 
+        case '[Snippets] - deleteSnippet': 
             return {
                 ...state, 
-                snippetsNames: state.snippetsNames.filter(snippetName => snippetName !== action.payload )
+                selectedSnippet: undefined,
+                snippetsNames: state.snippetsNames.filter((_, index) => index !== action.payload),
             }
         
+        case '[Snippets] - selectSnippet': 
+            return {
+                ...state,
+                selectedSnippet: action.payload
+            }
+
+        case '[Snippets] - setCode':
+            return {
+                ...state,
+                code: action.payload
+            }
     }
 }
