@@ -4,7 +4,8 @@ import { SnippetContext } from '../../context';
 
 export const SnipperEditor = () => {
 
-    const { setCode } = useContext( SnippetContext )
+    const { setCode,selectedSnippet } = useContext( SnippetContext )
+
 
     const editorRef = useRef<any>(null);
 
@@ -18,6 +19,7 @@ export const SnipperEditor = () => {
         <Editor
             height="100%"
             defaultLanguage='javascript'
+            defaultValue={ selectedSnippet ? selectedSnippet.code : '' }
             onMount={ handleEditorDidMount }
             theme='vs-dark'
             options={{

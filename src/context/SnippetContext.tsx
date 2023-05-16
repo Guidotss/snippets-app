@@ -1,5 +1,6 @@
 import { createContext } from 'react';
 import { Snippet } from '../interfaces/snippet';
+import { FileEntry } from '@tauri-apps/api/fs';
 
 
 interface SnippetContextProps {
