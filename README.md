@@ -1,6 +1,6 @@
 # Snippets-App 
 
-## Description
+## Descripcion
 Esta es una aplicacion sencilla creada con el fin de poder guardar y organizar snippets de codigo, para poder acceder a ellos de manera rapida y sencilla.
 
 ## Motivacion
